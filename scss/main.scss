@@ -1,0 +1,547 @@
+//@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap');
+@import 'vars';
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+}
+
+ul,
+ol,
+dl {
+    padding-left: 0;
+    margin: 0 0;
+    list-style: none;
+}
+
+html,
+body {
+    margin: 0;
+    font-family: Lato, sans-serif;
+    font-size: $font_size_main;
+}
+
+body {
+    color: $font_color_main;
+    min-height: 100vh;
+}
+
+
+
+.header,
+.banner,
+.blog,
+.post,
+.footer {
+    padding: 0 calc(50vw - $adaptive_width_container);
+
+    @media screen and (max-width: 1200px) {
+        padding: 0 calc(50vw - calc($adaptive_width_container - 12%));
+    }
+
+    @media screen and (max-width: 992px) {
+        padding: 0 calc(50vw - calc($adaptive_width_container - 27%));
+    }
+
+    @media screen and (max-width: 768px) {
+        padding: 0 15px;
+    }
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.8vw;
+    padding-top: 42px;
+    padding-bottom: 42px;
+
+    @media screen and (max-width: 992px) {
+        padding-top: 24px;
+        padding-bottom: 24px;
+    }
+}
+
+.logo {
+    &__img {
+        max-width: 118px;
+    }
+}
+
+.nav {
+    display: flex;
+    justify-content: flex-end;
+    flex-grow: 1;
+
+    @media screen and (max-width: 992px) {
+        order: 2;
+        flex-grow: 0;
+    }
+}
+
+.search {
+    @media screen and (max-width: 992px) {
+        display: flex;
+        flex-grow: 1;
+        justify-content: flex-end;
+        padding-right: 15px;
+    }
+}
+
+.menu {
+    display: flex;
+    gap: 2.5vw;
+    padding: 0 30px;
+
+    @media screen and (max-width: 992px) {
+        position: absolute;
+        right: -100%;
+        top: 68px;
+        width: 340px;
+        // visibility: hidden;
+        flex-direction: column;
+        background-color: #aacedc;
+        z-index: 2;
+        transition: all 0.6s;
+        padding: 0 0;
+        gap: 0;
+
+    }
+
+    &__link {
+      position: relative; 
+      display: inline-block;
+        text-decoration: none;
+        text-transform: uppercase;
+        color: $font_color_title;
+        font-size: 0.788rem;
+        letter-spacing: 0.3em;
+        padding-bottom: 5px; 
+
+        &::after {
+    content: "";
+    position: absolute;
+    left: 50%; //0; 
+    bottom: 0; 
+    transform: translateX(-50%);
+    width: 0; 
+    height: 1px;
+    background-color: #000;
+    opacity: 0;
+    transition: width 0.3s ease 
+}
+&:hover::after {
+  width: 100%;
+  opacity: 1;
+}
+
+    }
+
+    &__item {
+        @media screen and (max-width: 992px) {
+            text-align: center;
+            padding: 15px 0;
+            border: 1px solid #fff;
+        }
+
+    }
+}
+
+.burger {
+    display: none;
+
+    @media screen and (max-width: 992px) {
+        &:checked~.menu {
+            // visibility: visible;
+            right: 0;
+        }
+    }
+
+    &__img {
+        display: none;
+
+        @media screen and (max-width: 992px) {
+            display: inline-block;
+            position: relative;
+            top: -3px;
+            width: 34px;
+            height: 2px;
+            background-color: #000;
+            vertical-align: middle;
+            transition: background-color 0.3s ease;
+
+            &::after,
+            &::before {
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 2px;
+                background-color: #000;
+                top: 10px;
+                transition: transform 0.3s ease, top 0.3s ease, opacity 0.3s ease;
+            }
+
+            &::after {
+                top: -10px;
+            }
+          }
+          
+           @media screen and (max-width: 992px) {
+           &:hover .burger__img {
+              background-color: transparent; // ховаємо середню смужку
+
+            &::before {
+              transform: rotate(45deg);
+              top: 0;
+            }
+
+            &::after {
+            transform: rotate(-45deg);
+            top: 0;
+            }
+        }
+    }
+}
+
+
+.banner {
+    background: url('../assets/img/bg-image.png') no-repeat;
+    background-size: cover;
+    min-height: calc(85vh - 100px);
+    padding-top: 100px;
+
+    @media screen and (min-width: 1580px) {
+        background-position-y: 37%;
+        min-height: calc(77vh - 100px);
+    }
+
+    &__title {
+        font-family: "Red Hat Display", serif;
+        font-size: 3rem;
+        line-height: 1.33;
+        color: $font_color_title;
+        max-width: 770px;
+        letter-spacing: 0.05rem;
+
+        @media screen and (max-width: 992px) {
+            font-size: 2.34rem;
+        }
+
+        @media screen and (max-width: 576px) {
+            font-size: 2rem;
+        }
+    }
+
+}
+}
+
+.blog {
+    &_heading {
+    font-family: "Red Hat Display", serif;
+    font-size: 3rem;
+    font-weight: 400;
+    line-height: 2;
+    color: $font_color_title;
+    letter-spacing: 0.05rem;
+    }
+
+  &_article {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    justify-content: space-between;
+    align-items: center; 
+    margin-bottom: 40px;
+    transition: all 0.4s ease;
+  
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      transition: all 0.4s ease;
+    }
+
+    div {
+      flex: 1;
+      max-width: 450px;
+      transition: all 0.4s ease;
+    }
+
+    @media screen and (max-width: 768px) {
+      & {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      //align-items: center;
+      //text-align: center;
+
+      &_article {
+      // Картинка і текст лишаються в рядку, як і раніше
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+
+      img {
+        max-width: 90%;
+      }
+
+      div {
+        padding: 0 10px;
+        max-width: 55%;
+      }
+    }
+  }
+}
+  }
+}  
+ .reverse {
+    flex-direction: row-reverse;
+    transition: all 0.4s ease;
+
+    @media screen and (max-width: 992px) {
+      flex-direction: column; /* звичайний порядок */
+    }
+  }
+  &_subtitle {
+    font-family: Lato, serif;
+    font-size: 1rem;
+    line-height: 1.66;
+    color: $font_color_additional;
+    letter-spacing: 0.01rem;
+    margin-bottom: 30px;
+    margin-top: 15px;
+  }
+
+  &_title {
+    font-family: "Red Hat Display", serif;
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.33;
+    color: $font_color_title;
+    letter-spacing: 0.05rem;
+   }
+  &_text {
+    font-family: Lato, serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.66;
+    color: $font_color_add_text;
+    letter-spacing: 0.03rem;
+  }
+
+
+.post {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+
+  &_title {
+    font-family: "Red Hat Display", serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.33;
+    color: $font_color_title;
+    letter-spacing: 0.2rem;
+  }
+
+  &_subtitle {
+    font-size: 0.75rem;
+    line-height: 1.66;
+    color: $font_color_additional;
+    letter-spacing: 0.01rem;
+    margin-top: 15px;
+  }
+
+  &_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  &_wrap {
+    display: flex;
+    gap: 30px;
+  }
+
+  &_article {
+    flex: 1 1 calc(33.333% - 30px);
+    
+    display: flex;          // додаємо flex для горизонтального розташування зображення та тексту
+    flex-direction: row;
+    gap: 20px;
+
+    img {
+      max-width: 40%;       // ширина картинки у статті
+      height: auto;
+      display: block;
+    }
+
+    div {
+      max-width: 55%;       // ширина текстової частини
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .post_title {
+      font-family: "Red Hat Display", serif;
+      font-size: 1.25rem; 
+      line-height: 1.33;
+      margin: 0.4rem 0;
+      letter-spacing: 0.1rem;
+    }
+
+    @media screen and (max-width: 768px) {
+      flex: 1 1 100%;      // при ширині екрана <= 768px статті стають в один ряд по вертикалі
+      max-width: 100%;
+      
+      flex-direction: row; // картинка і текст залишаються горизонтально
+
+      img {
+        max-width: 40%;
+        flex-shrink: 0;
+      }
+
+      div {
+        max-width: 55%;
+      }
+    }
+  }
+
+ &_link {
+    position: relative;
+    text-decoration: none;
+    color: #565656;
+
+   &::after {
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin-left: 8px;
+    border-top: 2px solid currentColor;
+    border-right: 2px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform 0.3s ease;
+  }
+
+  &:hover::after {
+    transform: rotate(45deg) translateX(3px);
+  }
+
+
+  }
+    
+  &_btn_wrapper {
+    width: 100%;
+    text-align: center;
+    margin-top: 50px;
+  }  
+
+  &_btn {
+    width: 180px;
+    height: 46px;
+    background-color: #565656;
+    color: #FFFFFF;
+  } 
+}
+
+  .footer {
+  background: #F4F4F4;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  
+  &_card {
+    max-width: 370px;
+  }
+  &_container {
+    max-width: 269px;
+    display: flex;
+    justify-content: flex-end;
+  }
+.post_wrapper {
+    display: flex; 
+    justify-content: space-between;
+  }
+  .post_btn_wrapper {
+    margin-top: auto; 
+    text-align: center;
+  }
+  .blog_text {
+    font-size: 12px; 
+    color: #565656;
+    margin: 0;
+  }
+  .social {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    list-style: none;
+    margin: 0;
+
+    &__link {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 38px;
+      width: 38px;
+      background: #EFEEF3;
+      border:  1px solid #565656;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease, background-color 0.3s ease;
+    }
+
+    &__link svg {
+      width: 20px;
+      height: 20px;
+      display: block;
+      
+    }
+    
+     .social__link:hover  {
+    /*fill: #9784e0;*/
+     border: 3px solid  #8d8b8b;
+     transition: fill 0.3s ease;
+  }
+  .social__link:hover svg {
+  fill: #8d8b8b;
+  transition: fill 0.3s ease;
+}
+  .social-icon{
+    fill: #8d8b8b;
+  }
+
+  .img-svg:hover {
+    z-index: 2;
+    fill: #8d8b8b;
+  }
+}
+  
+ @media screen and (max-width: 768px) {
+  display: flex;
+  flex-direction: column;  
+
+    &_card,
+    &_container
+     {
+      max-width: 100%;       
+      margin: 0 0 20px 0;    
+      justify-content: center; 
+    }
+     &_wrapper {
+      display: block !important;
+     }
+    &_container {
+      margin-bottom: 0;      
+    }
+    .post_wrapper {
+      display: block !important;  
+    }
+  }
+}
+
+  
